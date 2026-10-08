@@ -27,6 +27,9 @@
 		"test": "n8n-node build && node --test test/fields.test.mjs test/node.test.mjs",
 		"prepublishOnly": "n8n-node prerelease"
 	},
+	"publishConfig": {
+		"access": "public"
+	},
 	"files": [
 		"dist"
 	],
