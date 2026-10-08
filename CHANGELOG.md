@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.2
+
+- New node and credential icon: the AccessEXL logo, with a separate version for n8n's dark theme. No change to how the node works.
+
 ## 0.1.1
 
 - Releases are now published through npm trusted publishing (GitHub Actions, no stored token). No change to the node.
