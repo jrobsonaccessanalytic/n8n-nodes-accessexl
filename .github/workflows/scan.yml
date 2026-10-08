@@ -1,0 +1,21 @@
+# Runs n8n's own community package scanner against the published package (the same check n8n uses for verification).
+# Start it by hand from the Actions tab after a release.
+name: Scan published package
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to scan'
+        required: true
+        default: '0.1.0'
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/*'
+      - name: Scan
+        run: npx --yes @n8n/scan-community-package n8n-nodes-accessexl@${{ inputs.version }}
