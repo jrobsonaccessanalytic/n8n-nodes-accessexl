@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="AccessEXL">
+	<g transform="translate(32 32)" fill="#4FC27F">
+		<path id="leaf" d="M0 -9 C6 -14 6 -24 0 -29 C-6 -24 -6 -14 0 -9 Z"/>
+		<use href="#leaf" transform="rotate(45)" fill="#7FE3A3"/>
+		<use href="#leaf" transform="rotate(90)"/>
+		<use href="#leaf" transform="rotate(135)" fill="#7FE3A3"/>
+		<use href="#leaf" transform="rotate(180)"/>
+		<use href="#leaf" transform="rotate(225)" fill="#7FE3A3"/>
+		<use href="#leaf" transform="rotate(270)"/>
+		<use href="#leaf" transform="rotate(315)" fill="#7FE3A3"/>
+	</g>
+</svg>
