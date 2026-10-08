@@ -1,6 +1,6 @@
 {
 	"name": "n8n-nodes-accessexl",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"description": "n8n node for AccessEXL: update inputs, run scenarios and read or write table rows in your Excel workbooks through a controlled API.",
 	"license": "MIT",
 	"homepage": "https://accessexl.accessanalytic.com.au",
