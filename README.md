@@ -1,12 +1,15 @@
 # n8n-nodes-accessexl
 
-This is an n8n community node for [AccessEXL](https://accessexl.accessanalytic.com.au). AccessEXL connects Excel workbooks stored in SharePoint to your automations through a controlled API. The workbook owner decides which named input cells, output cells and tables are available, and your workflows can then update inputs, recalculate the workbook, read results and read or write table rows, without anyone sharing the file itself.
+This is the n8n node for [AccessEXL](https://accessexl.accessanalytic.com.au). AccessEXL connects Excel workbooks stored in SharePoint to your automations through a controlled API. The workbook owner decides which named input cells, output cells and tables are available, and your workflows can then update inputs, recalculate the workbook, read results and read or write table rows, without anyone sharing the file itself.
 
 [Installation](#installation) · [Credentials](#credentials) · [Operations](#operations) · [Example workflows](#example-workflows) · [Limitations](#known-issues-and-limitations) · [Resources](#resources)
 
 ## Installation
 
-Follow the [community nodes installation guide](https://docs.n8n.io/integrations/community-nodes/installation/) in the n8n documentation and install the package `n8n-nodes-accessexl`.
+The AccessEXL node is verified by n8n and available on n8n Cloud.
+
+- **n8n Cloud:** in a workflow, open the nodes panel (**+**), search for **AccessEXL** and add it to your workflow.
+- **Self-hosted n8n:** do the same, or go to **Settings > Community nodes > Install** and enter `n8n-nodes-accessexl`. See n8n's [community nodes installation guide](https://docs.n8n.io/integrations/community-nodes/installation/).
 
 ## Credentials
 
