@@ -86,7 +86,24 @@ test('Add Row sends a single row to the table path', async () => {
 	});
 	const [out] = await run(ctx);
 	assert.deepEqual(ctx.calls[0].body, { row: { Item: 'x', Units: 2 } });
+	assert.equal(ctx.calls[0].qs, undefined);
 	assert.equal(out[0].json.rows_written, 1);
+});
+
+test('a chosen Write Mode is sent as write_mode on both table writes', async () => {
+	for (const operation of ['addRow', 'writeRows']) {
+		const ctx = context({
+			params: {
+				resource: 'table',
+				operation,
+				tableNameWrite: 'ReviewRows',
+				writeMode: 'append',
+				row: { mappingMode: 'defineBelow', value: { Item: 'x' } },
+			},
+		});
+		await run(ctx);
+		assert.deepEqual(ctx.calls[0].qs, { write_mode: 'append' }, operation);
+	}
 });
 
 test('Write Multiple Rows makes ONE call with a row per input item', async () => {

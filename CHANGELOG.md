@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.3
+
+- Table writes (Add Row, Write Multiple Rows) have a Write Mode option: Append or Overwrite for a table whose WriteMode is blank in the workbook. The default, Workbook Setting, works exactly as before.
+
 ## 0.1.2
 
 - New node and credential icon: the AccessEXL logo, with a separate version for n8n's dark theme. No change to how the node works.

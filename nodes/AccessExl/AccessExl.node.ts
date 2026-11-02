@@ -128,7 +128,7 @@ export class AccessExl implements INodeType {
 					{
 						name: 'Add Row',
 						value: 'addRow',
-						description: "Write one row using the table's append or overwrite mode",
+						description: "Write one row, appending or overwriting as the table's WriteMode or the Write Mode setting says",
 						action: 'Add a table row',
 					},
 					{
@@ -141,7 +141,7 @@ export class AccessExl implements INodeType {
 						name: 'Write Multiple Rows',
 						value: 'writeRows',
 						description:
-							"Write one row per input item in a single call, using the table's append or overwrite mode (overwrite replaces the existing rows)",
+							"Write one row per input item in a single call, appending or overwriting as the table's WriteMode or the Write Mode setting says (overwrite replaces the existing rows)",
 						action: 'Write multiple table rows',
 					},
 				],
@@ -208,6 +208,20 @@ export class AccessExl implements INodeType {
 				},
 				displayOptions: { show: { resource: ['table'], operation: ['addRow', 'writeRows'] } },
 			},
+			{
+				displayName: 'Write Mode',
+				name: 'writeMode',
+				type: 'options',
+				default: '',
+				description:
+					"Workbook Setting uses the table's WriteMode from the workbook. Choose Append or Overwrite only for a table whose WriteMode is blank there (with Workbook Setting, those tables overwrite).",
+				options: [
+					{ name: 'Append', value: 'append' },
+					{ name: 'Overwrite', value: 'overwrite' },
+					{ name: 'Workbook Setting', value: '' },
+				],
+				displayOptions: { show: { resource: ['table'], operation: ['addRow', 'writeRows'] } },
+			},
 		],
 	};
 
@@ -246,6 +260,12 @@ export class AccessExl implements INodeType {
 			return columnIds.get(tableName) as string[];
 		};
 
+		// Sent as ?write_mode= and only when chosen; it applies to a table whose WriteMode is blank in the workbook.
+		const writeModeQs = (index: number): IDataObject | undefined => {
+			const writeMode = this.getNodeParameter('writeMode', index, '') as string;
+			return writeMode ? { write_mode: writeMode } : undefined;
+		};
+
 		// Several input items become ONE call that writes one row per item.
 		if (resource === 'table' && operation === 'writeRows') {
 			try {
@@ -255,7 +275,7 @@ export class AccessExl implements INodeType {
 				const rows = items.map((item, index) =>
 					valuesFromMapper(this.getNodeParameter('row', index) as MapperParameter, item.json, ids),
 				);
-				const response = await accessExlRequest(this, 'POST', `${tablePath(tableName)}/rows`, { rows: rows as IDataObject[] });
+				const response = await accessExlRequest(this, 'POST', `${tablePath(tableName)}/rows`, { rows: rows as IDataObject[] }, writeModeQs(0));
 				return [[{ json: response, pairedItem: items.map((_, item) => ({ item })) }]];
 			} catch (error) {
 				if (this.continueOnFail()) {
@@ -301,7 +321,7 @@ export class AccessExl implements INodeType {
 						items[index].json,
 						mapper.mappingMode === 'autoMapInputData' ? await knownColumnIds(tableName) : [],
 					);
-					response = await accessExlRequest(this, 'POST', tablePath(tableName), { row: row as IDataObject });
+					response = await accessExlRequest(this, 'POST', tablePath(tableName), { row: row as IDataObject }, writeModeQs(index));
 				} else {
 					throw new NodeOperationError(this.getNode(), `Unknown operation: ${operation}`, { itemIndex: index });
 				}
