@@ -39,7 +39,7 @@ The inputs, outputs and table columns shown in the node come from your workbook'
 - **Get Rows:** return the rows of a readable table, one n8n item per row.
 - **Add Row:** write one row using the table's append or overwrite mode.
 - **Write Multiple Rows:** write one row per input item in a single call. Overwrite tables have their existing rows replaced. Entirely blank rows are skipped.
-- **Write Mode** (both table writes): Workbook Setting uses the table's WriteMode from the workbook. For a table whose WriteMode is blank there, choose Append or Overwrite on each write (Workbook Setting overwrites those tables).
+- **Write Mode** (both table writes): Workbook Setting uses the table's WriteMode from the workbook. For a table whose WriteMode is blank there, choose Append or Overwrite on each write (Workbook Setting appends to those tables, so nothing is wiped).
 
 For the inputs and row columns you can map values manually or choose **Map Automatically** to take the fields of the incoming item that have matching names. Empty values mean "not set".
 

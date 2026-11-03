@@ -214,7 +214,7 @@ export class AccessExl implements INodeType {
 				type: 'options',
 				default: '',
 				description:
-					"Workbook Setting uses the table's WriteMode from the workbook. Choose Append or Overwrite only for a table whose WriteMode is blank there (with Workbook Setting, those tables overwrite).",
+					"Workbook Setting uses the table's WriteMode from the workbook. Choose Append or Overwrite only for a table whose WriteMode is blank there (with Workbook Setting, those tables append, so nothing is wiped).",
 				options: [
 					{ name: 'Append', value: 'append' },
 					{ name: 'Overwrite', value: 'overwrite' },
