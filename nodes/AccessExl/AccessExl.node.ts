@@ -209,18 +209,27 @@ export class AccessExl implements INodeType {
 				displayOptions: { show: { resource: ['table'], operation: ['addRow', 'writeRows'] } },
 			},
 			{
-				displayName: 'Write Mode',
-				name: 'writeMode',
-				type: 'options',
-				default: '',
-				description:
-					"Workbook Setting uses the table's WriteMode from the workbook. Choose Append or Overwrite only for a table whose WriteMode is blank there (with Workbook Setting, those tables append, so nothing is wiped).",
-				options: [
-					{ name: 'Append', value: 'append' },
-					{ name: 'Overwrite', value: 'overwrite' },
-					{ name: 'Workbook Setting', value: '' },
-				],
+				displayName: 'Options',
+				name: 'options',
+				type: 'collection',
+				placeholder: 'Add option',
+				default: {},
 				displayOptions: { show: { resource: ['table'], operation: ['addRow', 'writeRows'] } },
+				options: [
+					{
+						displayName: 'Write Mode',
+						name: 'writeMode',
+						type: 'options',
+						default: '',
+						description:
+							"Workbook Setting uses the table's WriteMode from the workbook. Choose Append or Overwrite only for a table whose WriteMode is blank there (with Workbook Setting, those tables append, so nothing is wiped).",
+						options: [
+							{ name: 'Append', value: 'append' },
+							{ name: 'Overwrite', value: 'overwrite' },
+							{ name: 'Workbook Setting', value: '' },
+						],
+					},
+				],
 			},
 		],
 	};
@@ -262,7 +271,7 @@ export class AccessExl implements INodeType {
 
 		// Sent as ?write_mode= and only when chosen; it applies to a table whose WriteMode is blank in the workbook.
 		const writeModeQs = (index: number): IDataObject | undefined => {
-			const writeMode = this.getNodeParameter('writeMode', index, '') as string;
+			const writeMode = this.getNodeParameter('options.writeMode', index, '') as string;
 			return writeMode ? { write_mode: writeMode } : undefined;
 		};
 

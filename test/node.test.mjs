@@ -9,8 +9,9 @@ function context({ params, items = [{ json: {} }], responses = {}, continueOnFai
 	return {
 		calls,
 		getInputData: () => items,
-		getNodeParameter: (name, index) => {
-			const value = params[name];
+		getNodeParameter: (name, index, fallback) => {
+			// n8n resolves a dotted name inside a collection, e.g. options.writeMode
+			const value = name.split('.').reduce((v, key) => v?.[key], params) ?? fallback;
 			return typeof value === 'function' ? value(index) : value;
 		},
 		continueOnFail: () => continueOnFail,
@@ -97,7 +98,7 @@ test('a chosen Write Mode is sent as write_mode on both table writes', async () 
 				resource: 'table',
 				operation,
 				tableNameWrite: 'ReviewRows',
-				writeMode: 'append',
+				options: { writeMode: 'append' },
 				row: { mappingMode: 'defineBelow', value: { Item: 'x' } },
 			},
 		});

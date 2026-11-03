@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.5
+
+- Write Mode now sits under Options (Add option) on Add Row and Write Multiple Rows, so the main form shows only what's required. It works as before; a Write Mode chosen in 0.1.3 or 0.1.4 needs choosing again under Options.
+
 ## 0.1.4
 
 - Write Mode help text: with Workbook Setting, a table whose WriteMode is blank in the workbook now appends (AccessEXL changed this default so leaving the choice empty never wipes a table). No change to the node's behaviour.
